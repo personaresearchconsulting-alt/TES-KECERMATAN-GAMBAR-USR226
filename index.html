@@ -8,151 +8,193 @@
         :root {
             --navy: #0b2340;
             --gold: #d4a017;
-            --light: #f1f5f9;
+            --light-bg: #f8fafc;
         }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
         }
-        .login-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
+        .container {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 90%;
             max-width: 400px;
             text-align: center;
+            border-top: 10px solid var(--navy);
         }
-        img.logo { width: 80px; margin-bottom: 10px; }
-        h2 { color: var(--navy); margin-bottom: 5px; font-size: 1.2rem; }
-        p { color: #64748b; font-size: 0.9rem; margin-bottom: 20px; }
-        input {
+        .header-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .header-sub {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+        input[type="password"] {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            box-sizing: border-box;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
             text-align: center;
-            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
         }
-        .btn-access {
-            background: var(--navy);
-            color: #white;
-            color: white;
-            border: none;
-            padding: 12px;
+        input[type="password"]:focus {
+            border-color: var(--gold);
+        }
+        .btn-main {
             width: 100%;
-            border-radius: 8px;
+            padding: 16px;
+            background: var(--navy);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: opacity 0.3s;
         }
-        .btn-access:hover { background: #1a3a5f; }
-        .menu-area { display: none; margin-top: 20px; text-align: left; }
-        .test-option {
-            display: block;
-            padding: 15px;
-            background: var(--light);
-            margin-bottom: 10px;
+        .btn-main:hover { opacity: 0.9; }
+        .error-box {
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 12px;
             border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+            border: 1px solid #fee2e2;
+        }
+        #menuArea { display: none; margin-top: 10px; }
+        .test-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f5f9;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 12px;
             text-decoration: none;
             color: var(--navy);
-            font-weight: bold;
-            border-left: 5px solid var(--gold);
-            transition: 0.2s;
+            font-weight: 700;
+            border-left: 6px solid var(--gold);
+            transition: transform 0.2s, background 0.2s;
         }
-        .test-option:hover { background: #dee5ed; transform: translateX(5px); }
-        .error { color: #c0392b; font-size: 0.8rem; margin-bottom: 10px; display: none; }
+        .test-link:hover {
+            transform: translateX(5px);
+            background: #e2e8f0;
+        }
+        .footer-info {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 25px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <h2>PERSONA RESEARCH</h2>
-    <p>Sistem Pengamanan Tes Psikologi</p>
-    
-    <div id="authBox">
-        <input type="password" id="passInput" placeholder="Masukkan Kata Sandi..." />
-        <div id="errorMsg" class="error">Sandi salah atau akses ditolak.</div>
-        <button class="btn-access" onclick="validateAccess()">MASUK SISTEM</button>
+<div class="container">
+    <div class="header-title">Persona Research</div>
+    <div class="header-sub">Consulting & Assessment</div>
+
+    <div id="loginArea">
+        <div id="msgError" class="error-box"></div>
+        <input type="password" id="passInput" placeholder="Masukkan Password Akses" />
+        <button class="btn-main" onclick="verifyAccess()">MASUK KE SISTEM</button>
     </div>
 
-    <div id="menuBox" class="menu-area">
-        <p style="text-align:center; font-weight:bold;">PILIH MODUL TES:</p>
-        <a href="mono_1.html" class="test-option">1. Tes Kecermatan (Black & White)</a>
-        <a href="simbol_geometis_2.html" class="test-option">2. Tes Kecermatan (Simbol Geometris)</a>
-        <p style="font-size: 0.7rem; text-align: center; margin-top: 15px;">Sesi anda berlaku hingga 7 hari ke depan.</p>
+    <div id="menuArea">
+        <p style="font-weight: 600; color: #475569; margin-bottom: 20px; font-size: 14px;">PILIH MODUL UJIAN:</p>
+        
+        <a href="simbol_geometis_2.html" class="test-link">
+            <span>01. Tes Kecermatan (Gambar Hilang)</span>
+            <span>➔</span>
+        </a>
+        
+        <a href="mono_1.html" class="test-link">
+            <span>02. Tes Kecermatan (Simbol)</span>
+            <span>➔</span>
+        </a>
+
+        <div class="footer-info">
+            Sistem Keamanan Aktif<br>
+            Akses: 7 Hari • Limit: 3 Perangkat
+        </div>
     </div>
 </div>
 
 <script>
-    // KONFIGURASI KEAMANAN
-    const CONFIG = {
-        pass: "2007desember13",
+    // Konfigurasi sesuai permintaan
+    const SETTINGS = {
+        key: "2007desember13",
         expiryDays: 7,
         maxDevices: 3
     };
 
-    function validateAccess() {
+    function verifyAccess() {
         const input = document.getElementById('passInput').value;
-        const error = document.getElementById('errorMsg');
-        const now = new Date();
+        const error = document.getElementById('msgError');
+        const now = new Date().getTime();
 
-        // 1. Cek Kata Sandi
-        if (input !== CONFIG.pass) {
-            error.innerText = "Kata sandi salah!";
+        // 1. Validasi Password
+        if (input !== SETTINGS.key) {
+            error.innerText = "Password tidak sesuai!";
             error.style.display = "block";
             return;
         }
 
-        // 2. Cek Limit Device (Fingerprint sederhana via LocalStorage)
-        let deviceID = localStorage.getItem('persona_device_id');
-        let registeredDevices = parseInt(localStorage.getItem('persona_device_count') || "0");
+        // 2. Validasi Limit Perangkat (Local Storage)
+        let deviceCount = parseInt(localStorage.getItem('pr_dev_count') || "0");
+        let hasAccess = localStorage.getItem('pr_access_active');
 
-        if (!deviceID) {
-            if (registeredDevices >= CONFIG.maxDevices) {
-                error.innerText = "Batas maksimal 3 perangkat tercapai!";
+        if (!hasAccess) {
+            if (deviceCount >= SETTINGS.maxDevices) {
+                error.innerText = "Akses ditolak: Limit 3 perangkat tercapai.";
                 error.style.display = "block";
                 return;
             }
-            // Daftarkan perangkat baru
-            localStorage.setItem('persona_device_id', 'DEV-' + Math.random().toString(36).substr(2, 9));
-            localStorage.setItem('persona_device_count', (registeredDevices + 1).toString());
+            localStorage.setItem('pr_access_active', 'true');
+            localStorage.setItem('pr_dev_count', (deviceCount + 1).toString());
         }
 
-        // 3. Cek Masa Berlaku (Expired)
-        let expiryDate = localStorage.getItem('persona_expiry');
-        if (!expiryDate) {
-            // Set kedaluwarsa 7 hari dari login pertama
-            const expireAt = now.getTime() + (CONFIG.expiryDays * 24 * 60 * 60 * 1000);
-            localStorage.setItem('persona_expiry', expireAt);
-            expiryDate = expireAt;
+        // 3. Validasi Masa Berlaku (7 Hari)
+        let expiryTime = localStorage.getItem('pr_expiry_time');
+        if (!expiryTime) {
+            expiryTime = now + (SETTINGS.expiryDays * 24 * 60 * 60 * 1000);
+            localStorage.setItem('pr_expiry_time', expiryTime);
         }
 
-        if (now.getTime() > parseInt(expiryDate)) {
-            error.innerText = "Masa akses telah habis (7 Hari)!";
+        if (now > parseInt(expiryTime)) {
+            error.innerText = "Masa berlaku akses Anda telah berakhir.";
             error.style.display = "block";
             return;
         }
 
-        // Jika semua lolos
-        document.getElementById('authBox').style.display = 'none';
-        document.getElementById('menuBox').style.display = 'block';
+        // Jika Lolos Semua
+        document.getElementById('loginArea').style.display = 'none';
+        document.getElementById('menuArea').style.display = 'block';
     }
 
-    // Auto-login jika sudah pernah masuk dan belum expired
-    window.onload = function() {
-        const expiry = localStorage.getItem('persona_expiry');
-        if (expiry && new Date().getTime() < parseInt(expiry)) {
-            // Tetap minta password untuk keamanan, atau bisa lgsg buka menuBox
-        }
-    }
+    // Enter Key Support
+    document.getElementById('passInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') verifyAccess();
+    });
 </script>
 
 </body>
