@@ -1,132 +1,42 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TES KECERMATAN GAMBAR HILANG - PERSONA RESEARCH</title>
-    <style>
-        :root {
-            --navy: #0b2340;
-            --gold: #d4a017;
-            --gray: #f1f5f9;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--gray);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            border-top: 6px solid var(--navy);
-        }
-        h1 { font-size: 18px; color: var(--navy); margin-bottom: 5px; }
-        h2 { font-size: 14px; color: var(--gold); margin-bottom: 25px; text-transform: uppercase; }
-        .input-group { margin-bottom: 15px; }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-            text-align: center;
-        }
-        .btn-access {
-            background: var(--navy);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.3s;
-        }
-        .btn-access:hover { opacity: 0.9; }
-        #menuList { display: none; margin-top: 20px; }
-        .menu-item {
-            display: block;
-            background: #f8fafc;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--navy);
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .menu-item:hover { border-color: var(--gold); background: #fff; }
-        .footer { margin-top: 25px; font-size: 11px; color: #64748b; border-top: 1px solid #eee; padding-top: 15px; }
-        .status-msg { font-size: 12px; color: #c0392b; margin-top: 10px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>TES KECERMATAN GAMBAR HILANG</h1>
-    <h2>PERSONA RESEARCH & CONSULTING</h2>
-
-    <div id="authBox">
-        <div class="input-group">
-            <input type="password" id="passInput" placeholder="Masukkan Password Akses">
-        </div>
-        <button class="btn-access" onclick="verifyAccess()">MASUK KE MENU</button>
-        <p id="errorMsg" class="status-msg"></p>
-    </div>
-
-    <div id="menuList">
-        <p style="font-size: 13px; color: #64748b;">Silakan pilih modul tes:</p>
-        <a href="mono_1.html" class="menu-item">1. Simulasi Kecermatan (Black & White)</a>
-        <a href="simbol_geometis_2.html" class="menu-item">2. Simulasi Kecermatan (Geometis)</a>
-    </div>
-
-    <div class="footer">
-        <b>Persona Research & Consulting</b><br>
-        WhatsApp: 0877 4251 5786
-    </div>
-</div>
-
 <script>
     // Konfigurasi
     const CONFIG = {
         pass: "2007desember13",
-        expiryDate: new Date("2026-05-04T23:59:59"), // 7 hari dari sekarang
-        maxDevices: 3,
-        minActiveDevice: 2 // Aktif setelah device ke-2
+        durationDays: 7, // Masa aktif 7 hari
+        maxDevices: 3,   // Maksimal 3 perangkat
+        minActiveDevice: 2 // Menu aktif setelah device ke-2 login
     };
 
     function verifyAccess() {
         const input = document.getElementById('passInput').value;
         const errorMsg = document.getElementById('errorMsg');
-        const now = new Date();
+        const now = new Date().getTime();
 
-        // 1. Cek Expired
-        if (now > CONFIG.expiryDate) {
-            errorMsg.textContent = "Akses sudah kedaluwarsa.";
-            return;
-        }
-
-        // 2. Cek Password
+        // 1. Cek Password
         if (input !== CONFIG.pass) {
             errorMsg.textContent = "Password salah!";
             return;
         }
 
-        // 3. Logic Device Management (Local Storage Based)
+        // 2. Kelola Data Perangkat & Waktu Akses
+        let firstLogin = localStorage.getItem('persona_first_login');
         let deviceID = localStorage.getItem('persona_device_id');
         let registeredDevices = JSON.parse(localStorage.getItem('registered_devices') || "[]");
 
+        // Set waktu login pertama kali (jika belum ada)
+        if (!firstLogin) {
+            firstLogin = now;
+            localStorage.setItem('persona_first_login', firstLogin);
+        }
+
+        // 3. Cek Masa Berlaku (7 hari setelah login pertama)
+        const expiryTime = parseInt(firstLogin) + (CONFIG.durationDays * 24 * 60 * 60 * 1000);
+        if (now > expiryTime) {
+            errorMsg.textContent = "Masa akses 7 hari Anda telah habis.";
+            return;
+        }
+
+        // 4. Registrasi Perangkat
         if (!deviceID) {
             if (registeredDevices.length < CONFIG.maxDevices) {
                 deviceID = 'DEV-' + Math.random().toString(36).substr(2, 9);
@@ -139,17 +49,14 @@
             }
         }
 
-        // 4. Syarat Aktif (Minimal device ke-2 login)
+        // 5. Syarat Aktivasi (Menu muncul setelah device ke-2 login)
         if (registeredDevices.length < CONFIG.minActiveDevice) {
-            errorMsg.textContent = "Menunggu aktivasi perangkat (Min. 2 perangkat terdaftar).";
+            errorMsg.textContent = "Akses terdaftar. Silakan login dari perangkat ke-2 untuk mengaktifkan menu.";
             return;
         }
 
-        // Jika lolos semua validasi
+        // Lolos semua validasi
         document.getElementById('authBox').style.display = 'none';
         document.getElementById('menuList').style.display = 'block';
     }
 </script>
-
-</body>
-</html>
