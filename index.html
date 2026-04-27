@@ -1,103 +1,157 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TES KECERMATAN GAMBAR HILANG - PERSONA RESEARCH</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Portal Tes Kecermatan | Persona Research</title>
     <style>
-        :root { --navy: #0b2340; --gold: #d4a017; --gray: #f1f5f9; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--gray); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 6px solid var(--navy); }
-        h1 { font-size: 18px; color: var(--navy); margin-bottom: 5px; }
-        h2 { font-size: 14px; color: var(--gold); margin-bottom: 25px; text-transform: uppercase; }
-        input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; margin-bottom: 15px; }
-        .btn-access { background: var(--navy); color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
-        #menuList { display: none; margin-top: 20px; }
-        .menu-item { display: block; background: #f8fafc; padding: 15px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 8px; text-decoration: none; color: var(--navy); font-weight: bold; }
-        .footer { margin-top: 25px; font-size: 11px; color: #64748b; border-top: 1px solid #eee; padding-top: 15px; }
-        .status-msg { font-size: 12px; color: #c0392b; margin-top: 10px; font-weight: bold; }
+        :root {
+            --navy: #0b2340;
+            --gold: #d4a017;
+            --light: #f1f5f9;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        img.logo { width: 80px; margin-bottom: 10px; }
+        h2 { color: var(--navy); margin-bottom: 5px; font-size: 1.2rem; }
+        p { color: #64748b; font-size: 0.9rem; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .btn-access {
+            background: var(--navy);
+            color: #white;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-access:hover { background: #1a3a5f; }
+        .menu-area { display: none; margin-top: 20px; text-align: left; }
+        .test-option {
+            display: block;
+            padding: 15px;
+            background: var(--light);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: bold;
+            border-left: 5px solid var(--gold);
+            transition: 0.2s;
+        }
+        .test-option:hover { background: #dee5ed; transform: translateX(5px); }
+        .error { color: #c0392b; font-size: 0.8rem; margin-bottom: 10px; display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>TES KECERMATAN GAMBAR HILANG</h1>
-    <h2>PERSONA RESEARCH & CONSULTING</h2>
-
+<div class="login-card">
+    <h2>PERSONA RESEARCH</h2>
+    <p>Sistem Pengamanan Tes Psikologi</p>
+    
     <div id="authBox">
-        <input type="password" id="passInput" placeholder="Masukkan Password Akses">
-        <button class="btn-access" onclick="verifyAccess()">MASUK KE MENU</button>
-        <p id="errorMsg" class="status-msg"></p>
+        <input type="password" id="passInput" placeholder="Masukkan Kata Sandi..." />
+        <div id="errorMsg" class="error">Sandi salah atau akses ditolak.</div>
+        <button class="btn-access" onclick="validateAccess()">MASUK SISTEM</button>
     </div>
 
-    <div id="menuList">
-        <p style="font-size: 13px; color: #64748b;">Silakan pilih modul tes:</p>
-        <a href="mono_1.html" class="menu-item">1. Simulasi Kecermatan (Black & White)</a>
-        <a href="simbol_geometis_2.html" class="menu-item">2. Simulasi Kecermatan (Geometis)</a>
-    </div>
-
-    <div class="footer">
-        <b>Persona Research & Consulting</b><br>
-        WhatsApp: 0877 4251 5786
+    <div id="menuBox" class="menu-area">
+        <p style="text-align:center; font-weight:bold;">PILIH MODUL TES:</p>
+        <a href="mono_1.html" class="test-option">1. Tes Kecermatan (Black & White)</a>
+        <a href="simbol_geometis_2.html" class="test-option">2. Tes Kecermatan (Simbol Geometris)</a>
+        <p style="font-size: 0.7rem; text-align: center; margin-top: 15px;">Sesi anda berlaku hingga 7 hari ke depan.</p>
     </div>
 </div>
 
 <script>
+    // KONFIGURASI KEAMANAN
     const CONFIG = {
-        pass: "2007desember13", //
-        durationDays: 7, //
-        maxDevices: 3, //
-        minActiveDevice: 2 //
+        pass: "2007desember13",
+        expiryDays: 7,
+        maxDevices: 3
     };
 
-    function verifyAccess() {
+    function validateAccess() {
         const input = document.getElementById('passInput').value;
-        const errorMsg = document.getElementById('errorMsg');
-        const now = new Date().getTime();
+        const error = document.getElementById('errorMsg');
+        const now = new Date();
 
+        // 1. Cek Kata Sandi
         if (input !== CONFIG.pass) {
-            errorMsg.textContent = "Password salah!";
+            error.innerText = "Kata sandi salah!";
+            error.style.display = "block";
             return;
         }
 
-        let firstLogin = localStorage.getItem('persona_first_login');
+        // 2. Cek Limit Device (Fingerprint sederhana via LocalStorage)
         let deviceID = localStorage.getItem('persona_device_id');
-        let registeredDevices = JSON.parse(localStorage.getItem('registered_devices') || "[]");
+        let registeredDevices = parseInt(localStorage.getItem('persona_device_count') || "0");
 
-        // Catat waktu login pertama kali
-        if (!firstLogin) {
-            firstLogin = now;
-            localStorage.setItem('persona_first_login', firstLogin);
-        }
-
-        // Cek apakah sudah lewat 7 hari dari login pertama
-        const expiryTime = parseInt(firstLogin) + (CONFIG.durationDays * 24 * 60 * 60 * 1000);
-        if (now > expiryTime) {
-            errorMsg.textContent = "Masa akses 7 hari Anda telah habis.";
-            return;
-        }
-
-        // Registrasi ID Perangkat Baru
         if (!deviceID) {
-            if (registeredDevices.length < CONFIG.maxDevices) {
-                deviceID = 'DEV-' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('persona_device_id', deviceID);
-                registeredDevices.push(deviceID);
-                localStorage.setItem('registered_devices', JSON.stringify(registeredDevices));
-            } else {
-                errorMsg.textContent = "Batas maksimal 3 perangkat tercapai.";
+            if (registeredDevices >= CONFIG.maxDevices) {
+                error.innerText = "Batas maksimal 3 perangkat tercapai!";
+                error.style.display = "block";
                 return;
             }
+            // Daftarkan perangkat baru
+            localStorage.setItem('persona_device_id', 'DEV-' + Math.random().toString(36).substr(2, 9));
+            localStorage.setItem('persona_device_count', (registeredDevices + 1).toString());
         }
 
-        // Syarat Aktivasi: Minimal 2 perangkat harus sudah pernah login
-        if (registeredDevices.length < CONFIG.minActiveDevice) {
-            errorMsg.textContent = "Akses terdaftar. Silakan login dari perangkat ke-2 untuk mengaktifkan menu.";
+        // 3. Cek Masa Berlaku (Expired)
+        let expiryDate = localStorage.getItem('persona_expiry');
+        if (!expiryDate) {
+            // Set kedaluwarsa 7 hari dari login pertama
+            const expireAt = now.getTime() + (CONFIG.expiryDays * 24 * 60 * 60 * 1000);
+            localStorage.setItem('persona_expiry', expireAt);
+            expiryDate = expireAt;
+        }
+
+        if (now.getTime() > parseInt(expiryDate)) {
+            error.innerText = "Masa akses telah habis (7 Hari)!";
+            error.style.display = "block";
             return;
         }
 
+        // Jika semua lolos
         document.getElementById('authBox').style.display = 'none';
-        document.getElementById('menuList').style.display = 'block';
+        document.getElementById('menuBox').style.display = 'block';
+    }
+
+    // Auto-login jika sudah pernah masuk dan belum expired
+    window.onload = function() {
+        const expiry = localStorage.getItem('persona_expiry');
+        if (expiry && new Date().getTime() < parseInt(expiry)) {
+            // Tetap minta password untuk keamanan, atau bisa lgsg buka menuBox
+        }
     }
 </script>
 
