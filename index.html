@@ -1,200 +1,220 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Portal Tes Kecermatan | Persona Research</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TES KECERMATAN GAMBAR - Persona Research & Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #0b2340;
             --gold: #d4a017;
-            --light-bg: #f8fafc;
+            --ivory: #f8fafc;
+            --white: #ffffff;
         }
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--light-bg);
             margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            -webkit-user-select: none;
+            user-select: none;
         }
         .container {
-            background: #ffffff;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: var(--white);
+            max-width: 450px;
             width: 90%;
-            max-width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--navy);
             text-align: center;
-            border-top: 10px solid var(--navy);
         }
-        .header-title {
-            font-size: 22px;
-            font-weight: 800;
+        .logo-text {
             color: var(--navy);
+            font-weight: 900;
+            font-size: 20px;
             margin-bottom: 5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
-        .header-sub {
-            font-size: 13px;
+        .subtitle {
             color: #64748b;
+            font-size: 14px;
             margin-bottom: 30px;
-            letter-spacing: 1.5px;
         }
-        input[type="password"] {
-            width: 100%;
+        .status-box {
+            background: var(--ivory);
             padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            text-align: center;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        input[type="password"]:focus {
-            border-color: var(--gold);
-        }
-        .btn-main {
-            width: 100%;
-            padding: 16px;
-            background: var(--navy);
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .btn-main:hover { opacity: 0.9; }
-        .error-box {
-            color: #b91c1c;
-            background: #fef2f2;
-            padding: 12px;
             border-radius: 8px;
             font-size: 13px;
             margin-bottom: 20px;
-            display: none;
-            border: 1px solid #fee2e2;
+            border: 1px solid #e2e8f0;
+            line-height: 1.5;
         }
-        #menuArea { display: none; margin-top: 10px; }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--navy);
+        }
+        .btn-access {
+            background: var(--navy);
+            color: var(--gold);
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .link-grid {
+            display: none;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
         .test-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f1f5f9;
-            padding: 18px;
-            margin-bottom: 12px;
-            border-radius: 12px;
+            background: var(--ivory);
+            padding: 15px;
+            border-radius: 8px;
             text-decoration: none;
             color: var(--navy);
             font-weight: 700;
-            border-left: 6px solid var(--gold);
-            transition: transform 0.2s, background 0.2s;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
+            font-size: 13px;
         }
         .test-link:hover {
-            transform: translateX(5px);
-            background: #e2e8f0;
+            border-color: var(--gold);
+            background: #fff;
         }
-        .footer-info {
+        .footer {
+            margin-top: 30px;
             font-size: 11px;
             color: #94a3b8;
-            margin-top: 25px;
-            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-title">Persona Research</div>
-    <div class="header-sub">Consulting & Assessment</div>
+    <div class="logo-text">TES KECERMATAN GAMBAR</div>
+    <div class="subtitle">Persona Research & Consulting</div>
 
-    <div id="loginArea">
-        <div id="msgError" class="error-box"></div>
-        <input type="password" id="passInput" placeholder="Masukkan Password Akses" />
-        <button class="btn-main" onclick="verifyAccess()">MASUK KE SISTEM</button>
+    <div id="loginSection">
+        <div class="status-box" id="deviceStatus">Mengecek sistem keamanan...</div>
+        <input type="password" id="passInput" placeholder="Masukkan Password Akses">
+        <button class="btn-access" onclick="validateAccess()">BUKA MODUL</button>
     </div>
 
-    <div id="menuArea">
-        <p style="font-weight: 600; color: #475569; margin-bottom: 20px; font-size: 14px;">PILIH MODUL UJIAN:</p>
-        
-        <a href="simbol_geometis_2.html" class="test-link">
-            <span>01. Tes Kecermatan (Gambar Hilang)</span>
-            <span>➔</span>
-        </a>
-        
-        <a href="mono_1.html" class="test-link">
-            <span>02. Tes Kecermatan (Simbol)</span>
-            <span>➔</span>
-        </a>
-
-        <div class="footer-info">
-            Sistem Keamanan Aktif<br>
-            Akses: 7 Hari • Limit: 3 Perangkat
+    <div id="linkSection" class="link-grid">
+        <div class="status-box" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">
+            <b>AKSES DIIZINKAN</b><br>
+            <span id="expiryTimer">Masa aktif 7 hari (Trigger: Device 3)</span>
         </div>
+        <a href="simbol_geometis_2.html" class="test-link">1. SIMULASI SIMBOL GEOMETRIS</a>
+        <a href="mono_1.html" class="test-link">2. SIMULASI GAMBAR MONOKROM (BW)</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Persona Research & Consulting<br>
+        WA: 0877 4251 5786
     </div>
 </div>
 
 <script>
-    // Konfigurasi sesuai permintaan
-    const SETTINGS = {
-        key: "2007desember13",
-        expiryDays: 7,
-        maxDevices: 3
+    const CONFIG = {
+        pass: "desember13", 
+        maxDevices: 3, 
+        durationDays: 7,
+        storageKey: "psy_portal_gambar_v5"
     };
 
-    function verifyAccess() {
+    function validateAccess() {
         const input = document.getElementById('passInput').value;
-        const error = document.getElementById('msgError');
         const now = new Date().getTime();
+        
+        let localData = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {
+            devicesUsed: 0,
+            expiryTime: null,
+            authorized: false
+        };
 
-        // 1. Validasi Password
-        if (input !== SETTINGS.key) {
-            error.innerText = "Password tidak sesuai!";
-            error.style.display = "block";
+        if (input !== CONFIG.pass) {
+            alert("Password Salah!");
             return;
         }
 
-        // 2. Validasi Limit Perangkat (Local Storage)
-        let deviceCount = parseInt(localStorage.getItem('pr_dev_count') || "0");
-        let hasAccess = localStorage.getItem('pr_access_active');
+        if (!localData.authorized) {
+            localData.devicesUsed += 1;
+            localData.authorized = true;
 
-        if (!hasAccess) {
-            if (deviceCount >= SETTINGS.maxDevices) {
-                error.innerText = "Akses ditolak: Limit 3 perangkat tercapai.";
-                error.style.display = "block";
-                return;
+            // Timer 7 hari aktif saat perangkat ke-3 login
+            if (localData.devicesUsed >= CONFIG.maxDevices && !localData.expiryTime) {
+                localData.expiryTime = now + (CONFIG.durationDays * 24 * 60 * 60 * 1000);
             }
-            localStorage.setItem('pr_access_active', 'true');
-            localStorage.setItem('pr_dev_count', (deviceCount + 1).toString());
         }
 
-        // 3. Validasi Masa Berlaku (7 Hari)
-        let expiryTime = localStorage.getItem('pr_expiry_time');
-        if (!expiryTime) {
-            expiryTime = now + (SETTINGS.expiryDays * 24 * 60 * 60 * 1000);
-            localStorage.setItem('pr_expiry_time', expiryTime);
-        }
-
-        if (now > parseInt(expiryTime)) {
-            error.innerText = "Masa berlaku akses Anda telah berakhir.";
-            error.style.display = "block";
-            return;
-        }
-
-        // Jika Lolos Semua
-        document.getElementById('loginArea').style.display = 'none';
-        document.getElementById('menuArea').style.display = 'block';
+        localStorage.setItem(CONFIG.storageKey, JSON.stringify(localData));
+        checkState();
     }
 
-    // Enter Key Support
-    document.getElementById('passInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') verifyAccess();
-    });
+    function checkState() {
+        const localData = JSON.parse(localStorage.getItem(CONFIG.storageKey));
+        const now = new Date().getTime();
+
+        if (localData && localData.authorized) {
+            if (localData.expiryTime && now > localData.expiryTime) {
+                document.getElementById('deviceStatus').innerHTML = "<b style='color:red'>AKSES KADALUWARSA</b><br>Batas waktu 7 hari telah habis.";
+                document.getElementById('passInput').style.display = "none";
+                document.querySelector('.btn-access').style.display = "none";
+                return;
+            }
+
+            document.getElementById('loginSection').style.display = "none";
+            document.getElementById('linkSection').style.display = "grid";
+
+            if (localData.expiryTime) {
+                updateTimer(localData.expiryTime);
+            } else {
+                document.getElementById('expiryTimer').textContent = `Status: Aktif (Device ${localData.devicesUsed}/${CONFIG.maxDevices})`;
+            }
+        } else {
+            document.getElementById('deviceStatus').textContent = "Silakan masukkan password untuk mengakses simulasi gambar.";
+        }
+    }
+
+    function updateTimer(expiry) {
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = expiry - now;
+            if (diff <= 0) {
+                location.reload();
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('expiryTimer').textContent = `Sisa Waktu: ${days} Hari ${hours} Jam ${mins} Menit`;
+        }, 1000);
+    }
+
+    window.onload = checkState;
 </script>
 
 </body>
